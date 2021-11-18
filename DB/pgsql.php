@@ -456,7 +456,7 @@ class DB_pgsql extends DB_common
      */
     function freeResult($result)
     {
-        if ($result instanceof \PgSql\Result) {
+        if ($result !== false) {
             unset($this->row[spl_object_id($result)]);
             unset($this->_num_rows[spl_object_id($result)]);
             $this->affected = 0;
@@ -906,7 +906,7 @@ class DB_pgsql extends DB_common
             $got_string = false;
         }
 
-        if (!($id instanceof \PgSql\Result)) {
+        if ($id === false) {
             return $this->pgsqlRaiseError(DB_ERROR_NEED_MORE_DATA);
         }
 
